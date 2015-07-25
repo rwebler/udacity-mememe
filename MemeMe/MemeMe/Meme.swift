@@ -21,3 +21,7 @@ struct Meme {
         return topText! + "\u{2026}" + bottomText!
     }
 }
+
+func == (lhs: Meme, rhs: Meme) -> Bool {
+    return lhs.memeImage == rhs.memeImage
+}

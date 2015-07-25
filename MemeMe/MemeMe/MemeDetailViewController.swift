@@ -14,16 +14,38 @@ class MemeDetailViewController : UIViewController {
     
     var meme: Meme!
     
+    var appDelegate: AppDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         var editButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "editMethod")
-        navigationItem.rightBarButtonItem = editButton
+        
+        var deleteButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "deleteMethod")
+
+        navigationItem.rightBarButtonItems = [editButton, deleteButton]
     }
     
     func editMethod() {
         println("to meme editor")
         //TODO: send meme object to editor
+    }
+    
+    func deleteMethod() {
+        println("delete meme")
+        
+        for (index, value) in enumerate(appDelegate.memes) {
+            var memeValue = value as Meme
+            if (memeValue == meme) {
+                appDelegate.memes.removeAtIndex(index)
+            }
+        }
+        
+        if let navController = self.navigationController {
+            navController.popViewControllerAnimated(true)
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
