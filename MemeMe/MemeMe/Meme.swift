@@ -17,11 +17,13 @@ struct Meme {
     
     var memeImage: UIImage
     
+    //generate title from top and bottom strings, separated by ellipsis
     func title() -> String {
         return topText! + "\u{2026}" + bottomText!
     }
 }
 
+//overload equality operator to compare Meme structures
 func == (lhs: Meme, rhs: Meme) -> Bool {
     return lhs.memeImage == rhs.memeImage
 }

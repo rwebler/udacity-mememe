@@ -30,7 +30,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = appDelegate.memes[indexPath.row]
         
-        // Set the name and image
+        // Send meme data to cell
         cell.load(meme)
         
         return cell

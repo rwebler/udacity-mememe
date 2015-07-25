@@ -32,7 +32,7 @@ class MemeTableViewController: UITableViewController, UITableViewDataSource, UIT
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! UITableViewCell
         let meme = self.appDelegate.memes[indexPath.row]
         
-        // Set the name and image
+        // Set the cell's title and image
         cell.textLabel?.text = meme.title()
         cell.imageView?.image = meme.memeImage
         

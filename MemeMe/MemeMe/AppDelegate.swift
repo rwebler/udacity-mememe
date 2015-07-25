@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    // The array of Meme structures used throughout the app
     var memes = [Meme]()
 
 

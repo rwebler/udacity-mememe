@@ -24,11 +24,28 @@ class MemeDetailViewController : UIViewController {
         
         var deleteButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "deleteMethod")
 
+        // add buttons to the right side of the bar
         navigationItem.rightBarButtonItems = [editButton, deleteButton]
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.hidden = true
+        
+        self.imageView!.image = meme.memeImage
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.tabBarController?.tabBar.hidden = false
     }
     
     func editMethod() {
         println("to meme editor")
+        
+        //call ViewController with existing meme
         let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditor") as! ViewController
         editController.meme = meme
         self.navigationController!.pushViewController(editController, animated: true)
@@ -37,6 +54,7 @@ class MemeDetailViewController : UIViewController {
     func deleteMethod() {
         println("delete meme")
         
+        // locate meme in array, then delete it
         for (index, value) in enumerate(appDelegate.memes) {
             var memeValue = value as Meme
             if (memeValue == meme) {
@@ -44,23 +62,11 @@ class MemeDetailViewController : UIViewController {
             }
         }
         
+        // go back
         if let navController = self.navigationController {
             navController.popViewControllerAnimated(true)
         }
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        self.tabBarController?.tabBar.hidden = true
-        
-        self.imageView!.image = meme.memeImage
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.hidden = false
     }
 }
 

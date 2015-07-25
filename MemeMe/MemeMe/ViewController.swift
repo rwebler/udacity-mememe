@@ -48,6 +48,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomText.textAlignment = .Center
         bottomText.delegate = self
         
+        //used when this view is called to edit an existing meme
         if (meme != nil) {
             topText.text = meme.topText
             bottomText.text = meme.bottomText
@@ -63,6 +64,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         shareButton.enabled = image.image != nil
         
+        // when editing existing memes, hide tabbar
         self.tabBarController?.tabBar.hidden = true
     }
     
@@ -98,9 +100,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func shareMeme(sender: AnyObject) {
+        
+        //create the meme structure
         let meme = save()
+        
+        //call the Activity View
         let activityVC = UIActivityViewController(activityItems: [meme.memeImage], applicationActivities: nil)
         
+        //after meme is shared, return to the Sent Memes view
         activityVC.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]!, error:NSError!) in
             if completed {
                 println("complete \(activityType)")
@@ -126,6 +133,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillShow(notification: NSNotification) {
+        //move view up when keyboard appears
         self.view.frame.origin.y -= getKeyboardHeight(notification)
     }
     
@@ -146,6 +154,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true;
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        println("textFieldDidBeginEditing")
+        if(textField == self.bottomText) {
+            //move view up when bottom text is being edited
+            self.subscribeToKeyboardNotifications()
+            if (textField.text == "BOTTOM") {
+                textField.text = ""
+            }
+        } else {
+            if (textField.text == "TOP") {
+                textField.text = ""
+            }
+        }
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         println("textFieldDidEndEditing")
         if(textField == self.bottomText) {
@@ -160,22 +183,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        println("textFieldDidBeginEditing")
-        if(textField == self.bottomText) {
-            self.subscribeToKeyboardNotifications()
-            if (textField.text == "BOTTOM") {
-                textField.text = ""
-            }
-        } else {
-            if (textField.text == "TOP") {
-                textField.text = ""
-            }
-        }
-    }
-    
     func generateMemedImage() -> UIImage {
         
+        // hide extra screen elements
         self.navbar.hidden = true
         self.toolbar.hidden = true
         
@@ -187,6 +197,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+        // re-display extra screen elements
         self.toolbar.hidden = false
         self.navbar.hidden = false
         
@@ -209,6 +220,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func dismiss(sender: UIBarButtonItem) {
+        //used by the Cancel button
         self.dismissViewControllerAnimated(true, completion: nil);
     }
     
