@@ -16,4 +16,8 @@ struct Meme {
     var originalImage: UIImage
     
     var memeImage: UIImage
+    
+    func title() -> String {
+        return topText! + "\u{2026}" + bottomText!
+    }
 }

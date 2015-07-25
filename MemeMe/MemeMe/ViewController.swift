@@ -24,6 +24,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var toolbar: UIToolbar!
     
+    @IBOutlet weak var navbar: UINavigationBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,6 +88,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func shareMeme(sender: AnyObject) {
         let meme = save()
         let activityVC = UIActivityViewController(activityItems: [meme.memeImage], applicationActivities: nil)
+        
+        activityVC.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]!, error:NSError!) in
+            if completed {
+                println("complete \(activityType)")
+                self.dismissViewControllerAnimated(true, completion: nil);
+            }
+        }
         
         self.presentViewController(activityVC, animated: true, completion: nil)
     }
@@ -155,8 +164,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func generateMemedImage() -> UIImage {
         
-        // TODO: Hide toolbar and navbar
-        self.navigationController?.navigationBarHidden = true
+        self.navbar.hidden = true
         self.toolbar.hidden = true
         
         // Render view to an image
@@ -167,9 +175,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        // TODO:  Show toolbar and navbar
         self.toolbar.hidden = false
-        self.navigationController?.navigationBarHidden = false
+        self.navbar.hidden = false
         
         return memedImage
     }
@@ -190,7 +197,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func dismiss(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: {});
+        self.dismissViewControllerAnimated(true, completion: nil);
     }
     
 }
