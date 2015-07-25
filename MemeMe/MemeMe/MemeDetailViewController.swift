@@ -29,7 +29,9 @@ class MemeDetailViewController : UIViewController {
     
     func editMethod() {
         println("to meme editor")
-        //TODO: send meme object to editor
+        let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditor") as! ViewController
+        editController.meme = meme
+        self.navigationController!.pushViewController(editController, animated: true)
     }
     
     func deleteMethod() {

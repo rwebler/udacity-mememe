@@ -26,6 +26,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBOutlet weak var navbar: UINavigationBar!
     
+    var meme: Meme!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +48,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomText.textAlignment = .Center
         bottomText.delegate = self
         
+        if (meme != nil) {
+            topText.text = meme.topText
+            bottomText.text = meme.bottomText
+            image.image = meme.originalImage
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,10 +62,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
         shareButton.enabled = image.image != nil
+        
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.tabBarController?.tabBar.hidden = false
     }
     
     @IBAction func pickImageFromAlbum(sender: AnyObject) {
