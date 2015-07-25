@@ -65,38 +65,38 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         shareButton.enabled = image.image != nil
         
         // when editing existing memes, hide tabbar
-        self.tabBarController?.tabBar.hidden = true
+        tabBarController?.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.tabBarController?.tabBar.hidden = false
+        tabBarController?.tabBar.hidden = false
     }
     
     @IBAction func pickImageFromAlbum(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func pickImageFromCamera(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.image.image = image
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func shareMeme(sender: AnyObject) {
@@ -115,7 +115,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
         
-        self.presentViewController(activityVC, animated: true, completion: nil)
+        presentViewController(activityVC, animated: true, completion: nil)
     }
     
     func subscribeToKeyboardNotifications() {
@@ -134,11 +134,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func keyboardWillShow(notification: NSNotification) {
         //move view up when keyboard appears
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        view.frame.origin.y -= getKeyboardHeight(notification)
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y += getKeyboardHeight(notification)
+        view.frame.origin.y += getKeyboardHeight(notification)
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -158,7 +158,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         println("textFieldDidBeginEditing")
         if(textField == self.bottomText) {
             //move view up when bottom text is being edited
-            self.subscribeToKeyboardNotifications()
+            subscribeToKeyboardNotifications()
             if (textField.text == "BOTTOM") {
                 textField.text = ""
             }
@@ -172,7 +172,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func textFieldDidEndEditing(textField: UITextField) {
         println("textFieldDidEndEditing")
         if(textField == self.bottomText) {
-            self.unsubscribeFromKeyboardNotifications()
+            unsubscribeFromKeyboardNotifications()
             if (textField.text == "") {
                 textField.text = "BOTTOM"
             }
@@ -186,20 +186,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func generateMemedImage() -> UIImage {
         
         // hide extra screen elements
-        self.navbar.hidden = true
-        self.toolbar.hidden = true
+        navbar.hidden = true
+        toolbar.hidden = true
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame,
+        view.drawViewHierarchyInRect(self.view.frame,
             afterScreenUpdates: true)
         let memedImage : UIImage =
         UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         // re-display extra screen elements
-        self.toolbar.hidden = false
-        self.navbar.hidden = false
+        toolbar.hidden = false
+        navbar.hidden = false
         
         return memedImage
     }
@@ -221,7 +221,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func dismiss(sender: UIBarButtonItem) {
         //used by the Cancel button
-        self.dismissViewControllerAnimated(true, completion: nil);
+        dismissViewControllerAnimated(true, completion: nil);
     }
     
 }

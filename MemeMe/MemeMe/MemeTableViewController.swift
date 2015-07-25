@@ -16,7 +16,7 @@ class MemeTableViewController: UITableViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -24,7 +24,7 @@ class MemeTableViewController: UITableViewController, UITableViewDataSource, UIT
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.appDelegate.memes.count
+        return appDelegate.memes.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -43,7 +43,7 @@ class MemeTableViewController: UITableViewController, UITableViewDataSource, UIT
         
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetailViewController
         detailController.meme = self.appDelegate.memes[indexPath.row]
-        self.navigationController!.pushViewController(detailController, animated: true)
+        navigationController!.pushViewController(detailController, animated: true)
         
     }
 }

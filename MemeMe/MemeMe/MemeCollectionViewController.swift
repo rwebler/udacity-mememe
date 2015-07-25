@@ -14,7 +14,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -41,7 +41,7 @@ class MemeCollectionViewController: UICollectionViewController, UICollectionView
         
         let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetailViewController
         detailController.meme = appDelegate.memes[indexPath.row]
-        self.navigationController!.pushViewController(detailController, animated: true)
+        navigationController!.pushViewController(detailController, animated: true)
         
     }
     
