@@ -20,7 +20,7 @@ class MemeTableViewController: UITableViewController, UITableViewDataSource, UIT
     }
     
     override func viewWillAppear(animated: Bool) {
-        tableView.reloadData()
+        tableView!.reloadData()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

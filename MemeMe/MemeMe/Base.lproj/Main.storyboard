@@ -32,20 +32,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oex-y7-rKP">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="150" height="150"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="geH-D7-pJQ">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MemeCollectionViewCell" reuseIdentifier="MemeCollectionViewCell" id="geH-D7-pJQ" customClass="MemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KCr-bi-N5I">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7s4-GX-8dB">
+                                            <rect key="frame" x="8" y="8" width="134" height="21"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Label">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAc-i8-Xf5">
+                                            <rect key="frame" x="8" y="121" width="134" height="21"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Label">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="KCr-bi-N5I" firstAttribute="leading" secondItem="geH-D7-pJQ" secondAttribute="leadingMargin" constant="-8" id="5Um-TA-lue"/>
+                                    <constraint firstItem="hAc-i8-Xf5" firstAttribute="leading" secondItem="geH-D7-pJQ" secondAttribute="leadingMargin" id="8cC-Wp-qDm"/>
+                                    <constraint firstItem="KCr-bi-N5I" firstAttribute="top" secondItem="geH-D7-pJQ" secondAttribute="topMargin" constant="-8" id="9FV-FS-owg"/>
+                                    <constraint firstItem="7s4-GX-8dB" firstAttribute="leading" secondItem="geH-D7-pJQ" secondAttribute="leadingMargin" id="BSH-0w-glf"/>
+                                    <constraint firstItem="hAc-i8-Xf5" firstAttribute="trailing" secondItem="geH-D7-pJQ" secondAttribute="trailingMargin" id="QdZ-JE-yVi"/>
+                                    <constraint firstItem="7s4-GX-8dB" firstAttribute="trailing" secondItem="geH-D7-pJQ" secondAttribute="trailingMargin" id="bBh-MF-PVU"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="KCr-bi-N5I" secondAttribute="trailing" constant="-8" id="bcO-Y7-tae"/>
+                                    <constraint firstItem="hAc-i8-Xf5" firstAttribute="bottom" secondItem="geH-D7-pJQ" secondAttribute="bottomMargin" id="el3-0C-b6m"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="KCr-bi-N5I" secondAttribute="bottom" constant="-8" id="pMh-y5-keG"/>
+                                    <constraint firstItem="7s4-GX-8dB" firstAttribute="top" secondItem="geH-D7-pJQ" secondAttribute="topMargin" id="qrZ-CO-BDS"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="bottomLabel" destination="hAc-i8-Xf5" id="zXm-tW-SOe"/>
+                                    <outlet property="memeImageView" destination="KCr-bi-N5I" id="Tqq-md-K4K"/>
+                                    <outlet property="topLabel" destination="7s4-GX-8dB" id="RMS-2P-Q0A"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
